@@ -2,8 +2,8 @@
 echo "------------------------------------AMBASSADOR------------------------------------"
 
 ####--------CHECKING HELM EXISTENCE------------
-output=$(helm version | grep "version.BuildInfo" )
-if [[ -n $output ]]
+
+if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
 then
     echo " "
 else
@@ -16,9 +16,9 @@ else
 fi
 
 ###----CHECKING CERT-MANAGER NAMESPACE EXISTENCE--- 
-namespace=$(kubectl get ns | grep "ambassador" )
 
-if [[ -n $namespace  ]]
+
+if [[ -n $(kubectl get ns | grep "ambassador" )  ]]
 then
     echo "namespace ambassador already exists"
 else
@@ -32,8 +32,8 @@ kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
 
 #--------CHECKING HELM REPO EXISTENCE-------
 
-repo=$(helm repo list | grep datawire)
-if [[ -n $repo  ]]
+
+if [[ -n $(helm repo list | grep datawire)  ]]
 then
     echo "repo  already exists"
 else
@@ -57,8 +57,8 @@ kubectl apply -f global.yaml -f tls.yaml
 echo "------------------------------------CERT-MANAGER------------------------------------"
 
 ####--------CHECKING HELM EXISTENCE------------
-output=$(helm version | grep "version.BuildInfo" )
-if [[ -n $output ]]
+
+if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
 then
     echo " "
 else 
@@ -70,9 +70,9 @@ else
 fi
 
 ###----CHECKING CERT-MANAGER NAMESPACE EXISTENCE--- 
-namespace=$(kubectl get ns | grep "cert-manager" )
-echo $namespace
-if [[ -n $namespace  ]]
+
+
+if [[ -n $(kubectl get ns | grep "cert-manager" )  ]]
 then
     echo "namespace cert-manager already exists"
 else
@@ -82,8 +82,8 @@ fi
 
 cd ../cert-manager ##DIRECTORY IN WHICH THERE ARE CREDENTIALS.JSON AND VALUES.YAML
 #------------CREATING SECRET FROM CREDENTIALS.JSON-----
-secret=$(kubectl get secret | grep "prod-cert-manager" )
-if [[-n $secret ]]
+
+if [[-n $(kubectl get secret | grep "prod-cert-manager" ) ]]
 then
     echo "secret prod-cert-manager alreay exists"
 else
@@ -93,8 +93,8 @@ fi
 kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.13/deploy/manifests/00-crds.yaml
 
 #--------CHECKING HELM REPO EXISTENCE-------
-repo=$(helm repo list | grep jetstack)
-if [[ -n $repo  ]]
+
+if [[ -n $(helm repo list | grep jetstack)  ]]
 then
     echo "repo already exists"
 else
@@ -109,8 +109,8 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 --wait 
 
 #-----CHECKING LINKERD EXISTENCE-------
-link=$(linkerd version | grep "Client version")
-if [[ -n $link]]
+
+if [[ -n $(linkerd version | grep "Client version") ]]
 then
     echo " "
 else
@@ -135,8 +135,8 @@ kubectl apply -n cert-manager -f clusterissuer-prod.yaml
 echo "------------------------------------EXTERNAL-DNS------------------------------------"
 
 ####--------CHECKING HELM EXISTENCE------------
-output=$(helm version | grep "version.BuildInfo" )
-if [[ -n $output ]]
+
+if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
 then
     echo " "
 else
@@ -148,8 +148,8 @@ else
 fi
 
 ###----CHECKING EXTERNAL-DNS NAMESPACE EXISTENCE--- 
-namespace=$(kubectl get ns | grep "external-dns" )
-if [[ -n $namespace  ]]
+
+if [[ -n $(kubectl get ns | grep "external-dns" )  ]]
 then
     echo "namespace external-dns already exists"
 else
@@ -158,8 +158,8 @@ fi
 
 cd ../external-dns ##DIRECTORY IN WHICH THERE ARE CREDENTIALS.JSON AND VALUES.YAML
 #------------CREATING SECRET FROM CREDENTIALS.JSON-----
-secret=$(kubectl get secret | grep "external-dns" )
-if [[ -n $secret ]]
+
+if [[ -n $(kubectl get secret | grep "external-dns" ) ]]
 then
     echo "secret external-dns alreay exists"
 else
@@ -169,9 +169,9 @@ fi
 
 
 #--------CHECKING HELM REPO EXISTENCE-------
-repo=$(helm repo list | grep bitnami)
 
-if [[ -n $repo  ]]
+
+if [[ -n $(helm repo list | grep bitnami)  ]]
 then
     echo "repo bitnami already exists"
 else
@@ -180,8 +180,8 @@ fi
 
 #------CHECKING CHART EXISTENCE----
 #-----HELM INSTALLING AND UPGRADING PART----
-chart=$(helm list -n external-dns | grep "external-dns")
-if [[ -n $chart ]]
+
+if [[ -n $(helm list -n external-dns | grep "external-dns") ]]
 then  
     echo "-----HELM UPGRADE------"
     helm upgrade external-dns stable/external-dns -f values.yaml
@@ -197,8 +197,8 @@ else
 fi
 
 #-----CHECKING LINKERD EXISTENCE-------
-link=$(linkerd version | grep "Client version")
-if [[ -n $link]]
+
+if [[ -n $(linkerd version | grep "Client version") ]]
 then
     echo " "
 else
@@ -218,8 +218,8 @@ kubectl get deploy -o yaml external-dns  -n external-dns | linkerd inject - | ku
 echo "------------------------------------RELOADER------------------------------------"
 
 ###--------checking helm existence----
-output=$(helm version | grep "version.BuildInfo" )
-if [[ -n $output ]]
+
+if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
 then
     echo " "
 else
@@ -232,9 +232,9 @@ fi
 
 
 #-------checking reloader namespaces existence-
-namespace=$(kubectl get ns | grep "reloader" )
-echo $namespace
-if [[ -n $namespace  ]]
+
+
+if [[ -n $(kubectl get ns | grep "reloader" )  ]]
 then
     echo "namespace ambassador already exists"
 else
@@ -242,9 +242,9 @@ else
 fi
 
 #------checking repo stakater existence-
-repo=$(helm repo list | grep stakater)
 
-if [[ -n $repo  ]]
+
+if [[ -n $(helm repo list | grep stakater) ]]
 then
     echo "repo  already exists"
 else
