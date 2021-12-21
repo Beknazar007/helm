@@ -7,6 +7,18 @@ echo "------------------------------------EXTERNAL-DNS--------------------------
 
 ####--------CHECKING HELM EXISTENCE------------
 
+if [[ -n $(ls /usr/bin | grep wget )]]
+then
+    echo " "
+else
+    echo "Installing wget"
+    apt update
+    apt install wget
+fi
+
+
+
+
 if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
 then
     echo " "
