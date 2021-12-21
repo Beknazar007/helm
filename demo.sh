@@ -7,7 +7,7 @@ echo "------------------------------------EXTERNAL-DNS--------------------------
 
 ####--------CHECKING HELM EXISTENCE------------
 
-if [[ -n $(ls /usr/bin | grep wget )]]
+if [[ -n $(ls /usr/bin | grep wget ) ]]
 then
     echo " "
 else
