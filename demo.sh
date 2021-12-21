@@ -12,8 +12,8 @@ then
     echo " "
 else
     echo "Installing wget"
-    apt update
-    apt install wget
+    sudo  apt update
+    sudo apt install wget
 fi
 
 
