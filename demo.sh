@@ -27,8 +27,8 @@ else
     echo "---------INSTALLING LINKERD----------"
     curl -fsL https://run.linkerd.io/install | sh
     export PATH=$PATH:$HOME/.linkerd2/bin
-    linkerd upgrade
     linkerd check --pre
+    linkerd upgrade
     linkerd install | kubectl apply -f -
     echo "Linkerd processes are running. Wait 10s"
     sleep 10s
