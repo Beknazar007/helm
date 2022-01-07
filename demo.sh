@@ -202,7 +202,7 @@ else
     helm repo add datawire https://www.getambassador.io 
 fi
 #-----HELM INSTALLING AND UPGRADING PART----
-cd ../ambassador
+cd ../ambassador-aes1
 
 helm repo update
 helm upgrade --install ambassador-aes1 datawire/ambassador -n ambassador \
