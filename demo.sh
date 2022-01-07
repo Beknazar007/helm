@@ -30,8 +30,8 @@ else
     linkerd check --pre
     linkerd upgrade
     linkerd install | kubectl apply -f -
-    echo "Linkerd processes are running. Wait 10s"
-    sleep 10s
+    echo "Linkerd processes are running. Wait 20s"
+    sleep 20s
 fi
 
 
@@ -99,6 +99,7 @@ fi
 echo "-------------------------------------------------------------- "
 echo "-------------------------------------------------------------- "
 echo "----ANNOTATING WITH LINKERD------------------------------------"
+export PATH=$PATH:$HOME/.linkerd2/bin
 kubectl get deploy -o yaml external-dns  -n external-dns | linkerd inject - | kubectl apply -f -
 
 
@@ -159,6 +160,7 @@ helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manag
 echo "-------------------------------------------------------------- "
 echo "-------------------------------------------------------------- "
 echo "----ANNOTATING WITH LINKERD-----------------------"
+export PATH=$PATH:$HOME/.linkerd2/bin
 kubectl get deploy -o yaml -n cert-manager | linkerd inject - | kubectl apply -f -
 
 
