@@ -3,10 +3,8 @@
 ####--------CHECKING HELM EXISTENCE------------
 
 
-if [[ -n $(helm version | grep "version.BuildInfo" ) ]]
+if  ! command -v helm &> /dev/null 
 then
-    echo " "
-else
     echo "-------------------------------------------------------------- "
     echo "-------------------------------------------------------------- "
     echo "-----INSTALLING HELM------------------------------------------"
@@ -18,10 +16,8 @@ fi
 
 #-----CHECKING LINKERD EXISTENCE-------
 
-if [[ -n $(linkerd version | grep "Client version") ]]
+if  ! command -v linkerd &> /dev/null 
 then
-    echo " "
-else
     echo "-------------------------------------------------------------- "
     echo "-------------------------------------------------------------- "
     echo "---------INSTALLING LINKERD----------"
