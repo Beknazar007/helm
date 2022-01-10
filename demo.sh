@@ -24,7 +24,6 @@ then
     curl -fsL https://run.linkerd.io/install | sh
     export PATH=$PATH:$HOME/.linkerd2/bin
     linkerd check --pre
-    linkerd upgrade
     linkerd install | kubectl apply -f -
     echo "Linkerd processes are running. Wait 20s"
     sleep 20s
